@@ -29,12 +29,14 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -65,8 +67,12 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<AddressbookModel> list(
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size			
 	) {
-		return sp.list();
+		return sp.list(query, queryType, position, size);
 	}
 
 	@POST
@@ -89,13 +95,14 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	}
 
 	@PUT
-	@Path("/")
+	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AddressbookModel update(
+		@PathParam("id") String id,
 		AddressbookModel addressbook
 	) {
-		return sp.update(addressbook);
+		return sp.update(id, addressbook);
 	}
 
 	@DELETE

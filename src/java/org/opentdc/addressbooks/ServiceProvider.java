@@ -30,13 +30,18 @@ import org.opentdc.service.exception.NotFoundException;
 
 public interface ServiceProvider {
 	
-	public List<AddressbookModel> list();
+	public List<AddressbookModel> list(
+		String queryType,
+		String query,
+		long position,
+		long size
+	);
 
 	public AddressbookModel create(AddressbookModel addressbook) throws DuplicateException;
 
 	public AddressbookModel read(String id) throws NotFoundException;
 
-	public AddressbookModel update(AddressbookModel addressbook) throws NotFoundException;
+	public AddressbookModel update(String id, AddressbookModel addressbook) throws NotFoundException;
 
 	public void delete(String id) throws NotFoundException;
 
