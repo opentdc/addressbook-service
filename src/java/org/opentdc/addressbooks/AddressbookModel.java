@@ -23,9 +23,6 @@
  */
 package org.opentdc.addressbooks;
 
-import java.util.Formatter;
-import java.util.Locale;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,18 +33,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
-public class AddressbookData {
+public class AddressbookModel {
 	private String id;
 	private String name;
 
-	// TODO: List<Contact> contacts;
-	// TODO: List<Address> addresses;
-
-	public AddressbookData() {
+	public AddressbookModel() {
 		this.name = "undefined";
 	}
 
-	public AddressbookData(String name) {
+	public AddressbookModel(String name) {
 		this.name = name;
 	}
 
@@ -81,17 +75,4 @@ public class AddressbookData {
 		this.name = name;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder _sb = new StringBuilder();
-		Formatter _formatter = new Formatter(_sb, Locale.US);
-		_formatter.format("User [ID:%s\nname:%s\n", getId(), getName());
-		_formatter.close();
-		return _sb.toString();
-	}
 }
