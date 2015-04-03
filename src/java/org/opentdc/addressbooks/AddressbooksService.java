@@ -48,7 +48,7 @@ import org.opentdc.service.exception.NotFoundException;
 public class AddressbooksService extends GenericService<ServiceProvider> {
 
 	private static final Logger logger = Logger.getLogger(AddressbooksService.class.getName());
-	private static ServiceProvider sp = null;
+	private ServiceProvider sp = null;
 	
 	/**
 	 * Invoked for each service invocation (Constructor)
