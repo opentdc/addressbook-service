@@ -47,8 +47,8 @@ import org.opentdc.service.exception.NotFoundException;
 @Path("/api/addressbook")
 public class AddressbookService extends GenericService {
 
-	private Logger logger = Logger.getLogger(this.getClass().getName());
-	private Map<String, AddressbookData> data = new HashMap<String, AddressbookData>();
+	private static final Logger logger = Logger.getLogger(AddressbookService.class.getName());
+	private static Map<String, AddressbookData> data = new HashMap<String, AddressbookData>();
 
 	@GET
 	@Path("/")
