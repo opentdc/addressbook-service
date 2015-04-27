@@ -34,7 +34,6 @@ public class AddressbookModel {
 	private String name;
 
 	public AddressbookModel() {
-		this.name = "undefined";
 	}
 
 	public AddressbookModel(String name) {
