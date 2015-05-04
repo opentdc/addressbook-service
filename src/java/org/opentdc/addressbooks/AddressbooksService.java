@@ -113,12 +113,6 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		sp.delete(id);
 	}
 
-	@DELETE
-	@Path("/")
-	public void deleteAll() {
-		sp.deleteAll();
-	}
-
 	@GET
 	@Path("/count")
 	public int count(

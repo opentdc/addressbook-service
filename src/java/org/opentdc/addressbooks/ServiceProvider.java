@@ -44,8 +44,6 @@ public interface ServiceProvider {
 	public AddressbookModel update(String id, AddressbookModel addressbook) throws NotFoundException;
 
 	public void delete(String id) throws NotFoundException;
-
-	public void deleteAll();
 	
 	public int count();
 
