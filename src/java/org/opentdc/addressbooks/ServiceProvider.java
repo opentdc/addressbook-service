@@ -26,6 +26,7 @@ package org.opentdc.addressbooks;
 import java.util.List;
 
 import org.opentdc.service.exception.DuplicateException;
+import org.opentdc.service.exception.InternalServerErrorException;
 import org.opentdc.service.exception.NotFoundException;
 
 public interface ServiceProvider {
@@ -47,4 +48,72 @@ public interface ServiceProvider {
 	
 	public int count();
 
+	/************************* contacts *****************************/
+	public abstract List<ContactModel> listContacts(
+			String aid,
+			String query, 
+			String queryType, 
+			int position, 
+			int size);
+
+	public abstract ContactModel createContact(
+			String aid, 
+			ContactModel contact)
+		throws DuplicateException;
+	
+	public abstract ContactModel readContact(
+			String cid)
+		throws NotFoundException;
+
+	public abstract ContactModel updateContact(
+			String aid,
+			String cid,
+			ContactModel contact
+	) throws NotFoundException;
+
+	public abstract void deleteContact(
+		String aid, 
+		String cid
+	) throws NotFoundException, InternalServerErrorException;
+
+	public abstract int countContacts(
+			String aid);
+	
+	/************************* addresses *****************************/
+	public abstract List<AddressModel> listAddresses(
+			String aid,
+			String cid,
+			String query, 
+			String queryType, 
+			int position, 
+			int size);
+
+	public abstract AddressModel createAddress(
+			String aid, 
+			String cid,
+			AddressModel address)
+		throws DuplicateException;
+	
+	public abstract AddressModel readAddress(
+			String aid,
+			String cid,
+			String adrid)
+		throws NotFoundException;
+
+	public abstract AddressModel updateAddress(
+			String aid,
+			String cid,
+			String adrid,
+			AddressModel address
+	) throws NotFoundException;
+
+	public abstract void deleteAddress(
+		String aid, 
+		String cid,
+		String adrid
+	) throws NotFoundException, InternalServerErrorException;
+
+	public abstract int countAddresses(
+			String aid,
+			String cid);
 }

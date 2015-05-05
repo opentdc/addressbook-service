@@ -42,6 +42,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.opentdc.service.GenericService;
 import org.opentdc.service.exception.DuplicateException;
+import org.opentdc.service.exception.InternalServerErrorException;
 import org.opentdc.service.exception.NotFoundException;
 
 @Path("/api/addressbooks")
@@ -119,5 +120,138 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	) {
 		return sp.count();
 	}
+	
+	/********************************** contact ***************************************/
+	@GET
+	@Path("/{aid}/contact")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<ContactModel> listContacts(
+		@PathParam("aid") String adbId,
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
+	) {
+		return sp.listContacts(adbId, query, queryType, position, size);
+	}
 
+	@POST
+	@Path("/{aid}/contact")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ContactModel createContact(
+		@PathParam("aid") String aid, 
+		ContactModel contact
+	) throws DuplicateException, NotFoundException {
+		return sp.createContact(aid, contact);
+	}
+	
+	@GET
+	@Path("/{aid}/contact/{cid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ContactModel readContact(
+		@PathParam("aid") String aid,
+		@PathParam("cid") String cid
+	) throws NotFoundException {
+		return sp.readContact(cid);
+	}
+
+	@PUT
+	@Path("/{aid}/contact/{cid}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ContactModel updateContact(
+		@PathParam("aid") String aid,
+		@PathParam("cid") String cid,
+		ContactModel contact
+	) throws NotFoundException {
+		return sp.updateContact(aid, cid, contact);
+	}
+
+	@DELETE
+	@Path("/{aid}/contact/{cid}")
+	public void deleteContact(
+		@PathParam("aid") String aid,
+		@PathParam("cid") String cid
+	) throws NotFoundException, InternalServerErrorException {
+		sp.deleteContact(aid, cid);
+	}
+
+	@GET
+	@Path("/{aid}/contact/count")
+	public int countContacts(
+		@PathParam("aid") String aid
+	) {
+		return sp.countContacts(aid);
+	}
+
+	/********************************** address ***************************************/
+	@GET
+	@Path("/{aid}/contact/{cid}/address")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<AddressModel> listAddresses(
+		@PathParam("aid") String aid,
+		@PathParam("cid") String cid,
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
+	) {
+		return sp.listAddresses(aid, cid, query, queryType, position, size);
+	}
+
+	@POST
+	@Path("/{aid}/contact/{cid}/address")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public AddressModel createAddress(
+		@PathParam("aid") String aid, 
+		@PathParam("cid") String cid,
+		AddressModel address
+	) throws DuplicateException {
+		return sp.createAddress(aid, cid, address);
+	}
+	
+	@GET
+	@Path("/{aid}/contact/{cid}/address/{adrid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public AddressModel readAddress(
+		@PathParam("aid") String aid,
+		@PathParam("cid") String cid,
+		@PathParam("adrid") String adrid
+	) throws NotFoundException {
+		return sp.readAddress(aid, cid, adrid);
+	}
+
+	@PUT
+	@Path("/{aid}/contact/{pid}/address/{adrid}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public AddressModel updateAddress(
+		@PathParam("aid") String aid,
+		@PathParam("cid") String cid,
+		@PathParam("ardid") String adrid,
+		AddressModel address
+	) throws NotFoundException {
+		return sp.updateAddress(aid, cid, adrid, address);
+	}
+
+	@DELETE
+	@Path("/{aid}/contact/{pid}/address/{adrid}")
+	public void deleteAddress(
+		@PathParam("aid") String aid,
+		@PathParam("cid") String cid,
+		@PathParam("adrid") String adrid
+	) throws NotFoundException, InternalServerErrorException {
+		sp.deleteAddress(aid, cid, adrid);
+	}
+
+	@GET
+	@Path("/{aid}/contact/{v}/address/count")
+	public int countAddresses(
+		@PathParam("aid") String aid,
+		@PathParam("cid") String cid
+	) {
+		return sp.countAddresses(aid, cid);
+	}
 }
