@@ -114,25 +114,18 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		sp.delete(id);
 	}
 
-	@GET
-	@Path("/count")
-	public int count(
-	) {
-		return sp.count();
-	}
-	
 	/********************************** contact ***************************************/
 	@GET
 	@Path("/{aid}/contact")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<ContactModel> listContacts(
-		@PathParam("aid") String adbId,
+		@PathParam("aid") String aid,
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
 		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
 		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
 	) {
-		return sp.listContacts(adbId, query, queryType, position, size);
+		return sp.listContacts(aid, query, queryType, position, size);
 	}
 
 	@POST
@@ -153,7 +146,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		@PathParam("aid") String aid,
 		@PathParam("cid") String cid
 	) throws NotFoundException {
-		return sp.readContact(cid);
+		return sp.readContact(aid, cid);
 	}
 
 	@PUT
@@ -176,15 +169,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	) throws NotFoundException, InternalServerErrorException {
 		sp.deleteContact(aid, cid);
 	}
-
-	@GET
-	@Path("/{aid}/contact/count")
-	public int countContacts(
-		@PathParam("aid") String aid
-	) {
-		return sp.countContacts(aid);
-	}
-
+	
 	/********************************** address ***************************************/
 	@GET
 	@Path("/{aid}/contact/{cid}/address")
@@ -224,34 +209,25 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	}
 
 	@PUT
-	@Path("/{aid}/contact/{pid}/address/{adrid}")
+	@Path("/{aid}/contact/{cid}/address/{adrid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AddressModel updateAddress(
 		@PathParam("aid") String aid,
 		@PathParam("cid") String cid,
-		@PathParam("ardid") String adrid,
+		@PathParam("adrid") String adrid,
 		AddressModel address
 	) throws NotFoundException {
 		return sp.updateAddress(aid, cid, adrid, address);
 	}
 
 	@DELETE
-	@Path("/{aid}/contact/{pid}/address/{adrid}")
+	@Path("/{aid}/contact/{cid}/address/{adrid}")
 	public void deleteAddress(
 		@PathParam("aid") String aid,
 		@PathParam("cid") String cid,
 		@PathParam("adrid") String adrid
 	) throws NotFoundException, InternalServerErrorException {
 		sp.deleteAddress(aid, cid, adrid);
-	}
-
-	@GET
-	@Path("/{aid}/contact/{v}/address/count")
-	public int countAddresses(
-		@PathParam("aid") String aid,
-		@PathParam("cid") String cid
-	) {
-		return sp.countAddresses(aid, cid);
 	}
 }

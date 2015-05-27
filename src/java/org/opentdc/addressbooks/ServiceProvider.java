@@ -28,6 +28,7 @@ import java.util.List;
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
 import org.opentdc.service.exception.NotFoundException;
+import org.opentdc.service.exception.ValidationException;
 
 public interface ServiceProvider {
 	
@@ -38,15 +39,20 @@ public interface ServiceProvider {
 		long size
 	);
 
-	public AddressbookModel create(AddressbookModel addressbook) throws DuplicateException;
+	public AddressbookModel create(
+			AddressbookModel addressbook) 
+		throws DuplicateException, ValidationException;
 
-	public AddressbookModel read(String id) throws NotFoundException;
+	public AddressbookModel read(
+			String id) 
+		throws NotFoundException;
 
-	public AddressbookModel update(String id, AddressbookModel addressbook) throws NotFoundException;
+	public AddressbookModel update(
+			String id, 
+			AddressbookModel addressbook) 
+		throws NotFoundException;
 
 	public void delete(String id) throws NotFoundException;
-	
-	public int count();
 
 	/************************* contacts *****************************/
 	public abstract List<ContactModel> listContacts(
@@ -59,9 +65,10 @@ public interface ServiceProvider {
 	public abstract ContactModel createContact(
 			String aid, 
 			ContactModel contact)
-		throws DuplicateException;
+		throws DuplicateException, ValidationException;
 	
 	public abstract ContactModel readContact(
+			String aid,
 			String cid)
 		throws NotFoundException;
 
@@ -76,9 +83,6 @@ public interface ServiceProvider {
 		String cid
 	) throws NotFoundException, InternalServerErrorException;
 
-	public abstract int countContacts(
-			String aid);
-	
 	/************************* addresses *****************************/
 	public abstract List<AddressModel> listAddresses(
 			String aid,
@@ -92,7 +96,7 @@ public interface ServiceProvider {
 			String aid, 
 			String cid,
 			AddressModel address)
-		throws DuplicateException;
+		throws DuplicateException, ValidationException;
 	
 	public abstract AddressModel readAddress(
 			String aid,
@@ -112,8 +116,4 @@ public interface ServiceProvider {
 		String cid,
 		String adrid
 	) throws NotFoundException, InternalServerErrorException;
-
-	public abstract int countAddresses(
-			String aid,
-			String cid);
 }
