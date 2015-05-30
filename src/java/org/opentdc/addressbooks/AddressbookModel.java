@@ -23,6 +23,8 @@
  */
 package org.opentdc.addressbooks;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -32,6 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AddressbookModel {
 	private String id;
 	private String name;
+	private Date createdAt;
+	private String createdBy;
+	private Date modifiedAt;
+	private String modifiedBy;
 
 	public AddressbookModel() {
 	}
@@ -68,6 +74,38 @@ public class AddressbookModel {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(Date modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
 	}
 
 }

@@ -49,6 +49,10 @@ public class ContactModel {
 	private String note;
 	// TODO: dates: Type / Value   [Date]
 	// TODO: relatedName: type / value [String]
+	private Date createdAt;
+	private String createdBy;
+	private Date modifiedAt;
+	private String modifiedBy;
 	
 	public ContactModel() {
 		
@@ -172,6 +176,38 @@ public class ContactModel {
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(Date modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
 	}
 
 }

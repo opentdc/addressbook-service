@@ -43,7 +43,9 @@ import javax.ws.rs.core.MediaType;
 import org.opentdc.service.GenericService;
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
+import org.opentdc.service.exception.NotAllowedException;
 import org.opentdc.service.exception.NotFoundException;
+import org.opentdc.service.exception.ValidationException;
 
 @Path("/api/addressbooks")
 public class AddressbooksService extends GenericService<ServiceProvider> {
@@ -82,7 +84,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Produces(MediaType.APPLICATION_JSON)
 	public AddressbookModel create(
 		AddressbookModel addressbook
-	) throws DuplicateException {
+	) throws DuplicateException, ValidationException {
 		return sp.create(addressbook);
 	}
 
@@ -102,7 +104,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	public AddressbookModel update(
 		@PathParam("id") String id,
 		AddressbookModel addressbook
-	) {
+	) throws NotFoundException, NotAllowedException {
 		return sp.update(id, addressbook);
 	}
 
@@ -110,7 +112,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Path("/{id}")
 	public void delete(
 		@PathParam("id") String id
-	) throws NotFoundException {
+	) throws NotFoundException, InternalServerErrorException {
 		sp.delete(id);
 	}
 
@@ -135,7 +137,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	public ContactModel createContact(
 		@PathParam("aid") String aid, 
 		ContactModel contact
-	) throws DuplicateException, NotFoundException {
+	) throws DuplicateException, ValidationException {
 		return sp.createContact(aid, contact);
 	}
 	
@@ -157,7 +159,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		@PathParam("aid") String aid,
 		@PathParam("cid") String cid,
 		ContactModel contact
-	) throws NotFoundException {
+	) throws NotFoundException, NotAllowedException {
 		return sp.updateContact(aid, cid, contact);
 	}
 
@@ -193,7 +195,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		@PathParam("aid") String aid, 
 		@PathParam("cid") String cid,
 		AddressModel address
-	) throws DuplicateException {
+	) throws DuplicateException, ValidationException {
 		return sp.createAddress(aid, cid, address);
 	}
 	
@@ -217,7 +219,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		@PathParam("cid") String cid,
 		@PathParam("adrid") String adrid,
 		AddressModel address
-	) throws NotFoundException {
+	) throws NotFoundException, NotAllowedException {
 		return sp.updateAddress(aid, cid, adrid, address);
 	}
 
