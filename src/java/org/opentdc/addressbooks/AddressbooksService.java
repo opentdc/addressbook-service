@@ -59,11 +59,11 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	public AddressbooksService(
 		@Context ServletContext context
 	) throws ReflectiveOperationException{
-		logger.info("> RatesService()");
+		logger.info("> AddressbooksService()");
 		if (sp == null) {
 			sp = this.getServiceProvider(AddressbooksService.class, context);
 		}
-		logger.info("RatesService() initialized");
+		logger.info("AddressbooksService() initialized");
 	}
 
 	@GET
@@ -72,8 +72,8 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	public List<AddressbookModel> list(
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size			
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size			
 	) {
 		return sp.list(query, queryType, position, size);
 	}
