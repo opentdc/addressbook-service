@@ -43,7 +43,6 @@ import javax.ws.rs.core.MediaType;
 import org.opentdc.service.GenericService;
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
-import org.opentdc.service.exception.NotAllowedException;
 import org.opentdc.service.exception.NotFoundException;
 import org.opentdc.service.exception.ValidationException;
 
@@ -104,7 +103,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	public AddressbookModel update(
 		@PathParam("id") String id,
 		AddressbookModel addressbook
-	) throws NotFoundException, NotAllowedException {
+	) throws NotFoundException, ValidationException {
 		return sp.update(id, addressbook);
 	}
 
@@ -159,7 +158,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		@PathParam("aid") String aid,
 		@PathParam("cid") String cid,
 		ContactModel contact
-	) throws NotFoundException, NotAllowedException {
+	) throws NotFoundException, ValidationException {
 		return sp.updateContact(aid, cid, contact);
 	}
 
@@ -219,7 +218,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		@PathParam("cid") String cid,
 		@PathParam("adrid") String adrid,
 		AddressModel address
-	) throws NotFoundException, NotAllowedException {
+	) throws NotFoundException, ValidationException {
 		return sp.updateAddress(aid, cid, adrid, address);
 	}
 

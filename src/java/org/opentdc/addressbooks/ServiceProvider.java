@@ -27,7 +27,6 @@ import java.util.List;
 
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
-import org.opentdc.service.exception.NotAllowedException;
 import org.opentdc.service.exception.NotFoundException;
 import org.opentdc.service.exception.ValidationException;
 
@@ -51,7 +50,7 @@ public interface ServiceProvider {
 	public AddressbookModel update(
 			String id, 
 			AddressbookModel addressbook) 
-		throws NotFoundException, NotAllowedException;
+		throws NotFoundException, ValidationException;
 
 	public void delete(String id) throws NotFoundException, InternalServerErrorException;
 
@@ -77,7 +76,7 @@ public interface ServiceProvider {
 			String aid,
 			String cid,
 			ContactModel contact
-	) throws NotFoundException, NotAllowedException;
+	) throws NotFoundException, ValidationException;
 
 	public abstract void deleteContact(
 		String aid, 
@@ -110,7 +109,7 @@ public interface ServiceProvider {
 			String cid,
 			String adrid,
 			AddressModel address
-	) throws NotFoundException, NotAllowedException;
+	) throws NotFoundException, ValidationException;
 
 	public abstract void deleteAddress(
 		String aid, 
