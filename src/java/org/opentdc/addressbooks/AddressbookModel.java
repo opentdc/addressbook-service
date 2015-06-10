@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class AddressbookModel {
 	private String id;		// sortable
-	private String name;
+	private String name;	// mandatory
 	private Date createdAt;
 	private String createdBy;
 	private Date modifiedAt;
