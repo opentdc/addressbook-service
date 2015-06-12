@@ -171,6 +171,62 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		sp.deleteContact(aid, cid);
 	}
 	
+	/********************************** orgs ***************************************/
+	@GET
+	@Path("/{aid}/org")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<OrgModel> listOrgs(
+		@PathParam("aid") String aid,
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
+	) {
+		return sp.listOrgs(aid, query, queryType, position, size);
+	}
+
+	@POST
+	@Path("/{aid}/org")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public OrgModel createOrg(
+		@PathParam("aid") String aid, 
+		OrgModel org
+	) throws DuplicateException, ValidationException {
+		return sp.createOrg(aid, org);
+	}
+	
+	@GET
+	@Path("/{aid}/org/{oid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public OrgModel readOrg(
+		@PathParam("aid") String aid,
+		@PathParam("oid") String oid
+	) throws NotFoundException {
+		return sp.readOrg(aid, oid);
+	}
+
+	@PUT
+	@Path("/{aid}/org/{oid}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public OrgModel updateOrg(
+		@PathParam("aid") String aid,
+		@PathParam("oid") String oid,
+		OrgModel org
+	) throws NotFoundException, ValidationException {
+		return sp.updateOrg(aid, oid, org);
+	}
+
+	@DELETE
+	@Path("/{aid}/org/{oid}")
+	public void deleteOrg(
+		@PathParam("aid") String aid,
+		@PathParam("oid") String oid
+	) throws NotFoundException, InternalServerErrorException {
+		sp.deleteOrg(aid, oid);
+	}
+
 	/********************************** address ***************************************/
 	@GET
 	@Path("/{aid}/contact/{cid}/address")

@@ -83,6 +83,35 @@ public interface ServiceProvider {
 		String cid
 	) throws NotFoundException, InternalServerErrorException;
 
+	/************************* orgs *****************************/
+	public abstract List<OrgModel> listOrgs(
+			String aid,
+			String query, 
+			String queryType, 
+			int position, 
+			int size);
+
+	public abstract OrgModel createOrg(
+			String aid, 
+			OrgModel org)
+		throws DuplicateException, ValidationException;
+	
+	public abstract OrgModel readOrg(
+			String aid,
+			String oid)
+		throws NotFoundException;
+
+	public abstract OrgModel updateOrg(
+			String aid,
+			String oid,
+			OrgModel org
+	) throws NotFoundException, ValidationException;
+
+	public abstract void deleteOrg(
+		String aid, 
+		String oid
+	) throws NotFoundException, InternalServerErrorException;
+
 	/************************* addresses *****************************/
 	public abstract List<AddressModel> listAddresses(
 			String aid,
