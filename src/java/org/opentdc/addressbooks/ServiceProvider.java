@@ -53,6 +53,12 @@ public interface ServiceProvider {
 		throws NotFoundException, ValidationException;
 
 	public void delete(String id) throws NotFoundException, InternalServerErrorException;
+	
+	public List<ContactModel> listAllContacts(
+			String query, 
+			String queryType, 
+			int position, 
+			int size);
 
 	/************************* contacts *****************************/
 	public abstract List<ContactModel> listContacts(

@@ -114,6 +114,17 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	) throws NotFoundException, InternalServerErrorException {
 		sp.delete(id);
 	}
+	
+	@GET
+	@Path("/allContacts")
+	public List<ContactModel> allContacts(
+			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+			@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+			@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+			@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
+	) {
+		return sp.listAllContacts(query, queryType, position, size);
+	}
 
 	/********************************** contact ***************************************/
 	@GET
