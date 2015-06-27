@@ -35,8 +35,8 @@ public interface ServiceProvider {
 	public List<AddressbookModel> list(
 		String queryType,
 		String query,
-		long position,
-		long size
+		int position,
+		int size
 	);
 
 	public AddressbookModel create(

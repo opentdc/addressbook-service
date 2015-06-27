@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AddressModel {
 	private String id;			// sortable
 	private String attributeType;  // mandatory, e.g. Phone / Email / URL / InstantMessage / Address
-	private String type;    // mandatory, e.g. home / work
+	private AddressType type;    // mandatory, e.g. home / work
 	private String msgType;   // e.g. Twitter, Skype, Facebook
 	private String value;   // mandatory, e.g. +41 79 1234567, hans.muster@gmail.com
 	private String street; // maybe multiple lines
@@ -67,11 +67,11 @@ public class AddressModel {
 		this.attributeType = attributeType;
 	}
 
-	public String getType() {
+	public AddressType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(AddressType type) {
 		this.type = type;
 	}
 
