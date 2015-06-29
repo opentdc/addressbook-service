@@ -46,6 +46,11 @@ import org.opentdc.service.exception.InternalServerErrorException;
 import org.opentdc.service.exception.NotFoundException;
 import org.opentdc.service.exception.ValidationException;
 
+/**
+ * Describes the REST service API of addressbooks, contacts, orgs and addresses.
+ * @author bruno
+ *
+ */
 @Path("/api/addressbooks")
 public class AddressbooksService extends GenericService<ServiceProvider> {
 
@@ -65,6 +70,14 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		logger.info("AddressbooksService() initialized");
 	}
 
+	/**
+	 * Return a list of addressbooks
+	 * @param query
+	 * @param queryType
+	 * @param position	the position to start the result set with (default: GenericService.DEF_POSITION)
+	 * @param size	the number of addressbook objects to return (default: GenericService.DEF_SIZE)
+	 * @return	a list of size AddressbookModels starting from position 
+	 */
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -77,6 +90,13 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		return sp.list(query, queryType, position, size);
 	}
 
+	/**
+	 * Create a new addressbook object
+	 * @param addressbook
+	 * @return	the newly created addressbook; this is the same as the parameter plus a given random id
+	 * @throws DuplicateException if an addressbook with the same id already exists
+	 * @throws ValidationException if any validation checks fail
+	 */
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -87,6 +107,12 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		return sp.create(addressbook);
 	}
 
+	/**
+	 * Return the addressbook with id
+	 * @param id   the id to look for
+	 * @return  the addressbook with id
+	 * @throws NotFoundException	if no addressbook with this id exists
+	 */
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -96,6 +122,14 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		return sp.read(id);
 	}
 
+	/**
+	 * Change some attributes of the addressbook object
+	 * @param id		the id of the addressbook object to change
+	 * @param addressbook	an addressbook object with the new attributes. BEWARE: all attributes will be changed to these values.
+	 * @return	the addressbook object with the updated attributes
+	 * @throws NotFoundException	if no addressbook with such an id exists
+	 * @throws ValidationException	if any validation checks on the attribute values failed; see log for reason
+	 */
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -139,7 +173,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	) {
 		return sp.listContacts(aid, query, queryType, position, size);
 	}
-
+	
 	@POST
 	@Path("/{aid}/contact")
 	@Consumes(MediaType.APPLICATION_JSON)

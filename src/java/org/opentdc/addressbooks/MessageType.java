@@ -23,14 +23,18 @@
  */
 package org.opentdc.addressbooks;
 
-public enum AddressType {
-	PHONE,
-	EMAIL,
-	WEB,
-	MESSAGING,
-	POSTAL;
-			
-	public static AddressType getDefaultAddressType() {
-		return POSTAL;
+public enum MessageType {
+	TWITTER,
+	FACEBOOK,
+	SKYPE,
+	FLICKR,
+	LINKEDIN,
+	MYSPACE,
+	YELP,
+	THREEMA,
+	OTHER;
+	
+	public static MessageType getDefaultMessageType() {
+		return TWITTER;
 	}
 }

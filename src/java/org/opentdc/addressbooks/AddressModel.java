@@ -34,10 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class AddressModel {
 	private String id;			// sortable
-	private String attributeType;  // mandatory, e.g. Phone / Email / URL / InstantMessage / Address
-	private AddressType type;    // mandatory, e.g. home / work
-	private String msgType;   // e.g. Twitter, Skype, Facebook
-	private String value;   // mandatory, e.g. +41 79 1234567, hans.muster@gmail.com
+	private AddressType addressType;  		// mandatory (PHONE | EMAIL | WEB | MESSAGING | POSTAL )
+	private AttributeType attributeType;    // mandatory (HOME | WORK | OTHER)
+	private MessageType msgType;   				// TWITTER | FACEBOOK | FLICKR | SKYPE | LINKEDIN | OTHER
+	private String value;   // mandatory (if addressType!=POSTAL), e.g. +41 79 1234567, hans.muster@gmail.com
 	private String street; // maybe multiple lines
 	private String postalCode; 
 	private String city;
@@ -59,27 +59,27 @@ public class AddressModel {
 		this.id = id;
 	}
 
-	public String getAttributeType() {
+	public AddressType getAddressType() {
+		return addressType;
+	}
+
+	public void setAddressType(AddressType addressType) {
+		this.addressType = addressType;
+	}
+
+	public AttributeType getAttributeType() {
 		return attributeType;
 	}
 
-	public void setAttributeType(String attributeType) {
-		this.attributeType = attributeType;
+	public void setAttributeType(AttributeType type) {
+		this.attributeType = type;
 	}
 
-	public AddressType getType() {
-		return type;
-	}
-
-	public void setType(AddressType type) {
-		this.type = type;
-	}
-
-	public String getMsgType() {
+	public MessageType getMsgType() {
 		return msgType;
 	}
 
-	public void setMsgType(String msgType) {
+	public void setMsgType(MessageType msgType) {
 		this.msgType = msgType;
 	}
 

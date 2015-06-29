@@ -23,14 +23,12 @@
  */
 package org.opentdc.addressbooks;
 
-public enum AddressType {
-	PHONE,
-	EMAIL,
-	WEB,
-	MESSAGING,
-	POSTAL;
-			
-	public static AddressType getDefaultAddressType() {
-		return POSTAL;
+public enum AttributeType {
+	HOME,
+	WORK,
+	OTHER;
+	
+	public static AttributeType getDefaultAttributeType() {
+		return WORK;
 	}
 }

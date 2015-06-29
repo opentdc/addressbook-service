@@ -35,9 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ContactModel {
 	private String id;			// sortable
 	private String photoUrl;
-	private String fn;			// mandatory
-	private String firstName;
-	private String lastName;
+	private String fn;			// derived from firstName and lastName
+	private String firstName;	// mandatory
+	private String lastName;	// mandatory
 	private String middleName;
 	private String maidenName;
 	private String prefix;

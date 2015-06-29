@@ -26,7 +26,7 @@ package org.opentdc.addressbooks;
 import java.util.Arrays;
 
 /**
- * Configure default JSON provider.
+ * Configure default JSON provider of addressbooks.
  * 
  * @param <T>
  */

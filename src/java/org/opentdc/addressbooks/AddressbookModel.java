@@ -30,6 +30,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * @author bruno
+ *
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 public class AddressbookModel {
@@ -40,9 +44,17 @@ public class AddressbookModel {
 	private Date modifiedAt;
 	private String modifiedBy;
 
+	/**
+	 * Empty constructor
+	 */
 	public AddressbookModel() {
 	}
 
+	
+	/**
+	 * Constructor.
+	 * @param name the name of an addressbook
+	 */
 	public AddressbookModel(String name) {
 		this.name = name;
 	}
@@ -63,7 +75,7 @@ public class AddressbookModel {
 	}
 
 	/**
-	 * @return the name
+	 * @return the name of the addressbook
 	 */
 	public String getName() {
 		return name;
@@ -77,41 +89,71 @@ public class AddressbookModel {
 		this.name = name;
 	}
 
+	/**
+	 * @return createdAt
+	 */
 	public Date getCreatedAt() {
 		return createdAt;
 	}
 
+	/**
+	 * @param createdAt  the date of the addressbook creation
+	 */
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
+	/**
+	 * @return createdBy
+	 */
 	public String getCreatedBy() {
 		return createdBy;
 	}
 
+	/**
+	 * @param createdBy  the loginid of the creator of the addressbook object
+	 */
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
 
+	/**
+	 * @return modifiedAt the date of the last modification of this addressbook object
+	 */
 	public Date getModifiedAt() {
 		return modifiedAt;
 	}
 
+	/**
+	 * @param modifiedAt   the date of the last modification of this addressbook object
+	 */
 	public void setModifiedAt(Date modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
 
+	/**
+	 * @return modifiedBy	the loginId of the person having modified the addressbook object
+	 */
 	public String getModifiedBy() {
 		return modifiedBy;
 	}
 
+	/**
+	 * @param modifiedBy	 the loginId of the person that did the last modification of the addressbook object
+	 */
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
 	
 	/******************************* Comparator *****************************/
+	/**
+	 * Compares two addressbook objects based on their id.
+	 */
 	public static Comparator<AddressbookModel> AddressbookComparator = new Comparator<AddressbookModel>() {
 
+		/* (non-Javadoc)
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
 		public int compare(AddressbookModel obj1, AddressbookModel obj2) {
 			if (obj1.getId() == null) {
 				return -1;

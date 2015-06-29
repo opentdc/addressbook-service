@@ -23,60 +23,61 @@
  */
 package org.opentdc.addressbooks;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum OrgType {
-	COMP, 		// joint-stock company, AG
-	LTD, 		// limited liability company, GmbH
-	COOP, 		// cooperative, Genossenschaft
-	SOLE, 		// sole proprietorship, Einzelfirma
-	CLUB, 		// Club, Verein
-	TEAM,		// Team, Mannschaft
-	ASSOC,		// Association, Federation, Verband
-	ORGUNIT, 	// organizational part 
-	OTHER;
+	COMP("joint-stock company"),		// AG, Aktiengesellschaft
+	LTD("limited liability company"),	// GmbH
+	COOP("cooperative"),				// Genossenschaft
+	SOLE("sole proprietorship"),		// Einzelfirma
+	CLUB("club"),						// Verein
+	TEAM("team"),						// Mannschaft
+	ASSOC("association"),				// Verband
+	ORGUNIT("organizational unit"), 	// OE, Organisationseinheit 
+	OTHER("other organization type");	// anderer Organisationstyp
 		
-	// TODO: make this language specific and lang an enum
-	@Override
-	public String toString() {
-		String _label = null;
-		switch(this) {
-		case COMP:
-			_label = "joint-stock company";
-			// _label = "AG";
-			break;
-		case LTD:
-			_label = "limited liability company";
-			// _label = "GmbH";
-			break;
-		case COOP:
-			_label = "cooperative";
-			// _label = "Genossenschaft";
-			break;
-		case SOLE:
-			_label = "sole proprietorship";
-			// _label = "Einzelfirma";
-			break;
-		case CLUB:
-			_label = "club";
-			// _label = "Verein";
-			break;
-		case TEAM:
-			_label = "team";
-			// _label = "Mannschaft";
-		case ASSOC:
-			_label = "association";
-			// _label = "Verband";
-			break;
-		case ORGUNIT:
-			_label = "organizational unit";
-			// _label = "Organisationseinheit";
-			break;
-		case OTHER:
-			_label = "other organization type";
-			// _label = "Andere Organisationsform";
-			break;
-		}
-		return _label;
+	private String label;
+	private static Map<String, OrgType> stringToEnumMapping;
+
+	/**
+	 * Constructor.
+	 * @param label the label of the orgType.
+	 */
+	private OrgType(String label) {
+		this.label = label;
 	}
+	
+	/**
+	 * Returns the orgType based on its label.
+	 * @param label the label of the orgType.
+	 * @return the orgType
+	 */
+	public static OrgType getOrgType(String label) {
+		if (stringToEnumMapping == null) {
+			initMapping();
+		}
+		return stringToEnumMapping.get(label);
+	}
+
+	/**
+	 * Initializes the mappings between label and orgType.
+	 */
+	private static void initMapping() {
+		stringToEnumMapping = new HashMap<String, OrgType>();
+		for (OrgType _o : values()) {
+			stringToEnumMapping.put(_o.label, _o);
+		}
+	}
+
+	/**
+	 * Get the label. The label is the usual name of the currency in english.
+	 * @return the label
+	 */
+	public String getLabel() {
+		return label;
+	}
+
 	
 	public static OrgType getDefaultOrgType() {
 		return OTHER;
