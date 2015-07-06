@@ -37,34 +37,4 @@ public enum MessageType {
 	public static MessageType getDefaultMessageType() {
 		return TWITTER;
 	}
-	
-	public static MessageType fromString(String type) {
-		if (type.equalsIgnoreCase("twitter")) {
-			return TWITTER;
-		}
-		else if (type.equalsIgnoreCase("facebook")) {
-			return FACEBOOK;
-		}
-		else if (type.equalsIgnoreCase("skype")) {
-			return SKYPE;
-		}
-		else if (type.equalsIgnoreCase("flickr")) {
-			return FLICKR;
-		}
-		else if (type.equalsIgnoreCase("linkedin")) {
-			return LINKEDIN;
-		}
-		else if (type.equalsIgnoreCase("myspace")) {
-			return MYSPACE;
-		}
-		else if (type.equalsIgnoreCase("yelp")) {
-			return YELP;
-		}
-		else if (type.equalsIgnoreCase("threema")) {
-			return THREEMA;
-		}
-		else {
-			return OTHER;
-		}
-	}
 }
