@@ -38,10 +38,10 @@ public class AddressModel {
 	private AttributeType attributeType;    // mandatory (HOME | WORK | OTHER)
 	private MessageType msgType;   				// TWITTER | FACEBOOK | FLICKR | SKYPE | LINKEDIN | OTHER
 	private String value;   // mandatory (if addressType!=POSTAL), e.g. +41 79 1234567, hans.muster@gmail.com
-	private String street; // maybe multiple lines
-	private String postalCode; 
-	private String city;
-	private String country;
+	private String street; // maybe multiple lines, optional
+	private String postalCode;  // optional
+	private String city;		// optional
+	private short countryCode;	// ISO Code, default: 0 = NA
 	private Date createdAt;
 	private String createdBy;
 	private Date modifiedAt;
@@ -115,12 +115,12 @@ public class AddressModel {
 		this.city = city;
 	}
 
-	public String getCountry() {
-		return country;
+	public short getCountryCode() {
+		return countryCode;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setCountryCode(short isoCode) {
+		this.countryCode = isoCode;
 	}
 
 	public Date getCreatedAt() {
