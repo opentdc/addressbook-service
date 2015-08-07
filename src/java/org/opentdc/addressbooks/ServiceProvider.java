@@ -60,6 +60,12 @@ public interface ServiceProvider {
 			int position, 
 			int size);
 
+	public List<OrgModel> listAllOrgs(
+			String query, 
+			String queryType, 
+			int position, 
+			int size);
+
 	/************************* contacts *****************************/
 	public abstract List<ContactModel> listContacts(
 			String aid,
@@ -118,7 +124,7 @@ public interface ServiceProvider {
 		String oid
 	) throws NotFoundException, InternalServerErrorException;
 
-	/************************* addresses *****************************/
+	/************************* addresses (of contacts) *****************************/
 	public abstract List<AddressModel> listAddresses(
 			String aid,
 			String cid,
@@ -149,6 +155,40 @@ public interface ServiceProvider {
 	public abstract void deleteAddress(
 		String aid, 
 		String cid,
+		String adrid
+	) throws NotFoundException, InternalServerErrorException;
+	
+	/************************* addresses (of orgs) *****************************/
+	public abstract List<AddressModel> listOrgAddresses(
+			String aid,
+			String oid,
+			String query, 
+			String queryType, 
+			int position, 
+			int size);
+
+	public abstract AddressModel createOrgAddress(
+			String aid, 
+			String oid,
+			AddressModel address)
+		throws DuplicateException, ValidationException;
+	
+	public abstract AddressModel readOrgAddress(
+			String aid,
+			String oid,
+			String adrid)
+		throws NotFoundException;
+
+	public abstract AddressModel updateOrgAddress(
+			String aid,
+			String oid,
+			String adrid,
+			AddressModel address
+	) throws NotFoundException, ValidationException;
+
+	public abstract void deleteOrgAddress(
+		String aid, 
+		String oid,
 		String adrid
 	) throws NotFoundException, InternalServerErrorException;
 }

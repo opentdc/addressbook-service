@@ -160,6 +160,17 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		return sp.listAllContacts(query, queryType, position, size);
 	}
 
+	@GET
+	@Path("/allOrgs")
+	public List<OrgModel> allOrgs(
+			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+			@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+			@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+			@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
+	) {
+		return sp.listAllOrgs(query, queryType, position, size);
+	}
+
 	/********************************** contact ***************************************/
 	@GET
 	@Path("/{aid}/contact")
@@ -272,7 +283,7 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		sp.deleteOrg(aid, oid);
 	}
 
-	/********************************** address ***************************************/
+	/********************************** address (of contact) ***************************************/
 	@GET
 	@Path("/{aid}/contact/{cid}/address")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -331,5 +342,66 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 		@PathParam("adrid") String adrid
 	) throws NotFoundException, InternalServerErrorException {
 		sp.deleteAddress(aid, cid, adrid);
+	}
+	
+	/********************************** address (of org) ***************************************/
+	@GET
+	@Path("/{aid}/org/{oid}/address")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<AddressModel> listOrgAddresses(
+		@PathParam("aid") String aid,
+		@PathParam("oid") String oid,
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
+	) {
+		return sp.listOrgAddresses(aid, oid, query, queryType, position, size);
+	}
+
+	@POST
+	@Path("/{aid}/org/{oid}/address")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public AddressModel createOrgAddress(
+		@PathParam("aid") String aid, 
+		@PathParam("oid") String oid,
+		AddressModel address
+	) throws DuplicateException, ValidationException {
+		return sp.createOrgAddress(aid, oid, address);
+	}
+	
+	@GET
+	@Path("/{aid}/org/{oid}/address/{adrid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public AddressModel readOrgAddress(
+		@PathParam("aid") String aid,
+		@PathParam("oid") String oid,
+		@PathParam("adrid") String adrid
+	) throws NotFoundException {
+		return sp.readOrgAddress(aid, oid, adrid);
+	}
+
+	@PUT
+	@Path("/{aid}/org/{oid}/address/{adrid}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public AddressModel updateOrgAddress(
+		@PathParam("aid") String aid,
+		@PathParam("oid") String oid,
+		@PathParam("adrid") String adrid,
+		AddressModel address
+	) throws NotFoundException, ValidationException {
+		return sp.updateOrgAddress(aid, oid, adrid, address);
+	}
+
+	@DELETE
+	@Path("/{aid}/org/{oid}/address/{adrid}")
+	public void deleteOrgAddress(
+		@PathParam("aid") String aid,
+		@PathParam("oid") String oid,
+		@PathParam("adrid") String adrid
+	) throws NotFoundException, InternalServerErrorException {
+		sp.deleteOrgAddress(aid, oid, adrid);
 	}
 }
