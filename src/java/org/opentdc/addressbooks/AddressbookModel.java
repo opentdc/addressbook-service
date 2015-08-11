@@ -155,15 +155,15 @@ public class AddressbookModel {
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */
 		public int compare(AddressbookModel obj1, AddressbookModel obj2) {
-			if (obj1.getId() == null) {
+			if (obj1.getName() == null) {
 				return -1;
 			}
-			if (obj2.getId() == null) {
+			if (obj2.getName() == null) {
 				return 1;
 			}
 
-			String _attr1 = obj1.getId();
-			String _attr2 = obj2.getId();
+			String _attr1 = obj1.getName();
+			String _attr2 = obj2.getName();
 
 			// ascending order
 			return _attr1.compareTo(_attr2);
