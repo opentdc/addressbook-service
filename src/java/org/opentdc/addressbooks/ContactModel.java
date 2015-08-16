@@ -30,6 +30,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.opentdc.service.exception.ValidationException;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 public class ContactModel {
@@ -57,6 +59,16 @@ public class ContactModel {
 	
 	public ContactModel() {
 		
+	}
+	
+	public ContactModel(
+			String firstName, 
+			String lastName) 
+			throws ValidationException
+	{
+		this.firstName = firstName;
+		this.lastName = lastName;
+		fn = createFullName(firstName, lastName);
 	}
 
 	public String getId() {
@@ -209,6 +221,26 @@ public class ContactModel {
 
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
+	}
+	
+	public static String createFullName(
+			String firstName, 
+			String lastName)
+	{
+			String _fn = null;
+			if (firstName != null && !firstName.isEmpty()) {	// valid firstName
+				if (lastName != null && !lastName.isEmpty()) {	// valid lastName
+					_fn = firstName + " " + lastName;
+				} else {
+					_fn = firstName;
+				}
+			} else {	// no firstName
+				if (lastName != null && !lastName.isEmpty()) {
+					_fn = lastName;
+				}
+				// else -> _fn = null
+			}
+			return _fn;
 	}
 	
 	/******************************* Comparator *****************************/
