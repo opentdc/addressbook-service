@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -102,9 +103,10 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AddressbookModel create(
+		@Context HttpServletRequest request,
 		AddressbookModel addressbook
 	) throws DuplicateException, ValidationException {
-		return sp.create(addressbook);
+		return sp.create(request, addressbook);
 	}
 
 	/**
@@ -135,10 +137,11 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AddressbookModel update(
+		@Context HttpServletRequest request,
 		@PathParam("id") String id,
 		AddressbookModel addressbook
 	) throws NotFoundException, ValidationException {
-		return sp.update(id, addressbook);
+		return sp.update(request, id, addressbook);
 	}
 
 	@DELETE
@@ -190,10 +193,11 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ContactModel createContact(
+		@Context HttpServletRequest request,
 		@PathParam("aid") String aid, 
 		ContactModel contact
 	) throws DuplicateException, ValidationException {
-		return sp.createContact(aid, contact);
+		return sp.createContact(request, aid, contact);
 	}
 	
 	@GET
@@ -211,11 +215,12 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ContactModel updateContact(
+		@Context HttpServletRequest request,
 		@PathParam("aid") String aid,
 		@PathParam("cid") String cid,
 		ContactModel contact
 	) throws NotFoundException, ValidationException {
-		return sp.updateContact(aid, cid, contact);
+		return sp.updateContact(request, aid, cid, contact);
 	}
 
 	@DELETE
@@ -246,10 +251,11 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public OrgModel createOrg(
+		@Context HttpServletRequest request,
 		@PathParam("aid") String aid, 
 		OrgModel org
 	) throws DuplicateException, ValidationException {
-		return sp.createOrg(aid, org);
+		return sp.createOrg(request, aid, org);
 	}
 	
 	@GET
@@ -267,11 +273,12 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public OrgModel updateOrg(
+		@Context HttpServletRequest request,
 		@PathParam("aid") String aid,
 		@PathParam("oid") String oid,
 		OrgModel org
 	) throws NotFoundException, ValidationException {
-		return sp.updateOrg(aid, oid, org);
+		return sp.updateOrg(request, aid, oid, org);
 	}
 
 	@DELETE
@@ -303,11 +310,12 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AddressModel createAddress(
+		@Context HttpServletRequest request,
 		@PathParam("aid") String aid, 
 		@PathParam("cid") String cid,
 		AddressModel address
 	) throws DuplicateException, ValidationException {
-		return sp.createAddress(aid, cid, address);
+		return sp.createAddress(request, aid, cid, address);
 	}
 	
 	@GET
@@ -326,12 +334,13 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AddressModel updateAddress(
+		@Context HttpServletRequest request,
 		@PathParam("aid") String aid,
 		@PathParam("cid") String cid,
 		@PathParam("adrid") String adrid,
 		AddressModel address
 	) throws NotFoundException, ValidationException {
-		return sp.updateAddress(aid, cid, adrid, address);
+		return sp.updateAddress(request, aid, cid, adrid, address);
 	}
 
 	@DELETE
@@ -364,11 +373,12 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AddressModel createOrgAddress(
+		@Context HttpServletRequest request,
 		@PathParam("aid") String aid, 
 		@PathParam("oid") String oid,
 		AddressModel address
 	) throws DuplicateException, ValidationException {
-		return sp.createOrgAddress(aid, oid, address);
+		return sp.createOrgAddress(request, aid, oid, address);
 	}
 	
 	@GET
@@ -387,12 +397,13 @@ public class AddressbooksService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AddressModel updateOrgAddress(
+		@Context HttpServletRequest request,
 		@PathParam("aid") String aid,
 		@PathParam("oid") String oid,
 		@PathParam("adrid") String adrid,
 		AddressModel address
 	) throws NotFoundException, ValidationException {
-		return sp.updateOrgAddress(aid, oid, adrid, address);
+		return sp.updateOrgAddress(request, aid, oid, adrid, address);
 	}
 
 	@DELETE

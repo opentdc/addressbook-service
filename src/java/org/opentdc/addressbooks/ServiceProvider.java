@@ -25,6 +25,8 @@ package org.opentdc.addressbooks;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
 import org.opentdc.service.exception.NotFoundException;
@@ -40,6 +42,7 @@ public interface ServiceProvider {
 	);
 
 	public AddressbookModel create(
+			HttpServletRequest request,
 			AddressbookModel addressbook) 
 		throws DuplicateException, ValidationException;
 
@@ -48,6 +51,7 @@ public interface ServiceProvider {
 		throws NotFoundException;
 
 	public AddressbookModel update(
+			HttpServletRequest request,
 			String id, 
 			AddressbookModel addressbook) 
 		throws NotFoundException, ValidationException;
@@ -75,6 +79,7 @@ public interface ServiceProvider {
 			int size);
 
 	public abstract ContactModel createContact(
+			HttpServletRequest request,
 			String aid, 
 			ContactModel contact)
 		throws DuplicateException, ValidationException;
@@ -85,6 +90,7 @@ public interface ServiceProvider {
 		throws NotFoundException;
 
 	public abstract ContactModel updateContact(
+			HttpServletRequest request,
 			String aid,
 			String cid,
 			ContactModel contact
@@ -104,6 +110,7 @@ public interface ServiceProvider {
 			int size);
 
 	public abstract OrgModel createOrg(
+			HttpServletRequest request,
 			String aid, 
 			OrgModel org)
 		throws DuplicateException, ValidationException;
@@ -114,6 +121,7 @@ public interface ServiceProvider {
 		throws NotFoundException;
 
 	public abstract OrgModel updateOrg(
+			HttpServletRequest request,
 			String aid,
 			String oid,
 			OrgModel org
@@ -134,6 +142,7 @@ public interface ServiceProvider {
 			int size);
 
 	public abstract AddressModel createAddress(
+			HttpServletRequest request,
 			String aid, 
 			String cid,
 			AddressModel address)
@@ -146,6 +155,7 @@ public interface ServiceProvider {
 		throws NotFoundException;
 
 	public abstract AddressModel updateAddress(
+			HttpServletRequest request,
 			String aid,
 			String cid,
 			String adrid,
@@ -168,6 +178,7 @@ public interface ServiceProvider {
 			int size);
 
 	public abstract AddressModel createOrgAddress(
+			HttpServletRequest request,
 			String aid, 
 			String oid,
 			AddressModel address)
@@ -180,6 +191,7 @@ public interface ServiceProvider {
 		throws NotFoundException;
 
 	public abstract AddressModel updateOrgAddress(
+			HttpServletRequest request,
 			String aid,
 			String oid,
 			String adrid,
